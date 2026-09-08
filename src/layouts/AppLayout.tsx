@@ -1,12 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
-import ThemeSelector from "../components/ThemeSelector";
+import RouterTitle from "../components/RouterTitle";
+
 function AppLayout() {
   return (
     <div className="app-layout">
       <header>
+        <RouterTitle />
         <h1>Admin Auth</h1>
-
-        <ThemeSelector />
 
         <nav>
           <Link to="/dashboard">Dashboard</Link>

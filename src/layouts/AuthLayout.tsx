@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
 // import ThemeSelector from "../components/ThemeSelector";
+import RouterTitle from "../components/RouterTitle";
 import "./AuthLayout.css";
 function AuthLayout() {
   return (
     <div>
       {/* <ThemeSelector /> */}
       <div className="auth-layout">
+        <RouterTitle />
         <h1>Admin Auth</h1>
         <main>
           <Outlet />

@@ -3,8 +3,8 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 interface User {
   id: string;
   email: string;
-  name: string;
 }
+
 
 interface AuthState {
   user: User | null;
@@ -14,10 +14,12 @@ interface AuthState {
   error: string | null;
 }
 
+export type AuthObject = AuthState;
+
 const initialState: AuthState = {
   user: null,
-  accessToken: null,
-  isAuthenticated: false,
+  accessToken: localStorage.getItem("accessToken") || null,
+  isAuthenticated: localStorage.getItem("accessToken") ? true : false,
   loading: false,
   error: null,
 };
@@ -39,6 +41,8 @@ const authSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.isAuthenticated = true;
       state.error = null;
+
+      localStorage.setItem("accessToken", action.payload.accessToken);
     },
 
     logout: (state) => {
