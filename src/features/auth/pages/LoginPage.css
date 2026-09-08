@@ -1,0 +1,28 @@
+form{
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-bottom: 20%;
+    padding-top:20%;
+}
+
+form input{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+form button{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--text);
+    font-weight: bold;
+}

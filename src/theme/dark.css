@@ -1,0 +1,7 @@
+html[data-theme="dark"] {
+  --bg: #16171d;
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --border: #2e303a;
+  --code-bg: #1f2028;
+}
