@@ -14,6 +14,7 @@ interface AuthState {
   error: string | null;
 }
 
+export type UserObject = User;
 export type AuthObject = AuthState;
 
 const initialState: AuthState = {
@@ -46,10 +47,13 @@ const authSlice = createSlice({
     },
 
     logout: (state) => {
+      localStorage.removeItem("accessToken");
+
       state.user = null;
       state.accessToken = null;
       state.isAuthenticated = false;
       state.error = null;
+
     },
   },
 });

@@ -1,13 +1,30 @@
 import axios from "axios";
 import { store } from "../app/store";
 import { logout, setCredentials } from "../features/auth/authSlice";
+import {type UserObject} from "../features/auth/authSlice";
+
+
+interface Config {
+  data?: any;
+  params?: any;
+  success_handler?: (response: any) => void;
+  error_handler?: (error: any) => void;
+  finally_handler?: () => void;
+  requires_auth?: boolean;
+  responseType?: "json" | "blob";
+  onDownloadProgress?: (progressEvent: any) => void;
+  onUploadProgress?: (progressEvent: any) => void;
+  headers?: any;
+  timeout?: number;
+  signal?: AbortSignal;
+}
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
 });
 
-let refreshPromise = null;
+let refreshPromise: Promise<any> | null = null;
 
 api.interceptors.request.use(
   (config) => {
@@ -64,7 +81,7 @@ api.interceptors.response.use(
             const newAccessToken = response.data.access_token;
 
             store.dispatch(setCredentials({
-              user: store.getState().auth.user,
+              user: store.getState().auth.user as UserObject,
               accessToken: newAccessToken,
             }));
 
@@ -91,8 +108,8 @@ api.interceptors.response.use(
 export default api;
 
 export const api_request = async (
-  method,
-  endpoint,
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS",
+  endpoint: string,
   {
     data = null,
     params = null,
@@ -115,7 +132,7 @@ export const api_request = async (
   } = {},
 ) => {
   try {
-    const config = {
+    const config: Config = {
       method,
       url: endpoint,
       requiresAuth: requires_auth,

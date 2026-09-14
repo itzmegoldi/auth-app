@@ -1,24 +1,29 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import RouterTitle from "../components/RouterTitle";
+import SideBar from "../components/SideBar";
+import { useNavigate } from "react-router-dom";
+
+import { useAppDispatch } from "../app/hooks";
+import { logout } from "../features/auth/authSlice";
 
 function AppLayout() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
   return (
-    <div className="app-layout">
+    <div>
       <header>
         <RouterTitle />
-        <h1>Admin Auth</h1>
-
-        <nav>
-          <Link to="/dashboard">Dashboard</Link>
-
-          <Link to="/profile">Profile</Link>
-
-          <Link to="/settings">Settings</Link>
-        </nav>
       </header>
-
       <main>
-        <Outlet />
+        <div className="d-flex">
+          <SideBar onLogout={handleLogout} />
+          <Outlet />
+        </div>
       </main>
     </div>
   );

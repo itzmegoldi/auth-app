@@ -4,20 +4,21 @@ import LoginPage from "../features/auth/pages/LoginPage";
 import AuthLayout from "../layouts/AuthLayout";
 import AppLayout from "../layouts/AppLayout";
 import DashboardPage from "../features/dashboard/pages/dashboard";
+import PageNotFound from "../components/NotFoundPage";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: <AuthLayout />,
     children: [
       {
-        path: "login",
+        path: "/login",
         element: <LoginPage />,
       },
     ],
   },
   {
-    path: "/dashboard",
+    path: "/clients",
     element: <AppLayout />,
     children: [
       {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
         element: <DashboardPage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
 
